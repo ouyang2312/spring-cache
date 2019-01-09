@@ -1,6 +1,7 @@
 package com.ouyang.springcache;
 
 import com.google.gson.Gson;
+import com.ouyang.springcache.entity.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,11 +60,39 @@ public class SpringCacheApplicationTests {
 
     @Test
     public void testRedisTemplate2(){
-        System.out.println(redisTemplate.boundListOps("list1").leftPop());
-        Gson gson = new Gson();
-        Object list1 = redisTemplate.boundListOps("list1").leftPop();
-
+        Employee employee = new Employee(5,"ouy","aas@qq.com",1,2);
+        redisTemplate.boundValueOps(employee.getLastName()).set(employee);
     }
+
+    /**
+     *
+     */
+    @Test
+    public void testRedisTemplate3(){
+        Object ouy = redisTemplate.boundValueOps("ouy").get();
+        System.out.println(ouy);
+    }
+
+    /**
+     * Redis常见的五大数据类型
+     *  String（字符串）、List（列表）、Set（集合）、Hash（散列）、ZSet（有序集合）
+     *  stringRedisTemplate.opsForValue()[String（字符串）]
+     *  stringRedisTemplate.opsForList()[List（列表）]
+     *  stringRedisTemplate.opsForSet()[Set（集合）]
+     *  stringRedisTemplate.opsForHash()[Hash（散列）]
+     *  stringRedisTemplate.opsForZSet()[ZSet（有序集合）]
+     */
+    @Test
+    public void test01(){
+        //给redis中保存数据
+        //stringRedisTemplate.opsForValue().append("msg","hello");
+//		String msg = stringRedisTemplate.opsForValue().get("msg");
+//		System.out.println(msg);
+
+//		stringRedisTemplate.opsForList().leftPush("mylist","1");
+//		stringRedisTemplate.opsForList().leftPush("mylist","2");
+    }
+
 
 }
 
