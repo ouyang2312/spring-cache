@@ -7,6 +7,7 @@ import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,13 +19,16 @@ public class EmployeeService {
     @Autowired
     private EmployeeMapper employeeMapper;
 
+    @Autowired
+    private RedisTemplate redisTemplate;
+
     @Cacheable
     public List<Employee> list(){
         List<Employee> list = employeeMapper.list();
         return list;
     }
 
-    @Cacheable
+    @Cacheable("id")//缓存存储的key
     public Employee get(String id) {
         Employee employee = employeeMapper.getEmployee(id);
         return employee;
@@ -47,4 +51,5 @@ public class EmployeeService {
         boolean b = employeeMapper.insertEmployee(employee);
         return b;
     }
+
 }
