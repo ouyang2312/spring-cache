@@ -8,4 +8,50 @@
         select * from employee
     </select>
 
+    <select id="getEmployee" resultType="com.ouyang.springcache.entity.Employee">
+        select * from employee where id = #{id}
+    </select>
+
+    <update id="updateEmployee" parameterType="com.ouyang.springcache.entity.Employee">
+        update employee
+        <set>
+            <if test="lastName != null and lastName != ''">
+                last_name = #{lastName},
+            </if>
+            <if test="email != null and email != ''">
+                email = #{email},
+            </if>
+            <if test="gender != null and gender != ''">
+                gender = #{gender},
+            </if>
+            <if test="dId != null and dId != ''">
+                d_id = #{dId},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <insert id="insertEmployee" parameterType="com.ouyang.springcache.entity.Employee">
+        insert  into
+        employee
+        (
+            last_name,
+            email,
+            gender,
+            d_id
+        )values
+        (
+          #{lastName},
+          #{email},
+          #{gender},
+          #{dId}
+        )
+    </insert>
+
+    <delete id="deleteEmployee" parameterType="com.ouyang.springcache.entity.Employee">
+        <if test="id != null and id != ''">
+            delete from employee where id = #{id}
+        </if>
+    </delete>
+
 </mapper>
