@@ -5,7 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-//@MapperScan(basePackages = "com.ouyang.springcache")
+@MapperScan(basePackages = "com.ouyang.springcache.dao")
 public class SpringCacheApplication {
 
     public static void main(String[] args) {
