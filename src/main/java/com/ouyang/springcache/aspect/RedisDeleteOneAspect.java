@@ -2,6 +2,7 @@ package com.ouyang.springcache.aspect;
 
 import com.ouyang.springcache.annotation.RedisDeleteOne;
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -46,4 +47,20 @@ public class RedisDeleteOneAspect {
          System.out.println(delete);
      }
 
+    @After("annotationPointCut()")
+    public void after(JoinPoint joinPoint){
+        MethodSignature sign =  (MethodSignature)joinPoint.getSignature();
+        Method method = sign.getMethod();
+
+        Object[] args = joinPoint.getArgs();
+        StringBuffer key = new StringBuffer();
+        for (int i = 0; i < args.length; i++) {
+            key.append(args[i]);
+        }
+        RedisDeleteOne annotation = method.getAnnotation(RedisDeleteOne.class);
+        String id = annotation.value();
+        //拿到id 直接使用redis去删除对应的记录
+        Boolean delete = stringRedisTemplate.delete(id+"::"+key.toString());
+        System.out.println(delete);
+    }
 }
