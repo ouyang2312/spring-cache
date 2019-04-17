@@ -1,8 +1,10 @@
 package com.ouyang.springcache.service;
 
+import com.ouyang.springcache.annotation.RedisDeleteOne;
 import com.ouyang.springcache.dao.EmployeeMapper;
 import com.ouyang.springcache.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -40,10 +42,12 @@ public class EmployeeService {
         return b;
     }
 
-    @CacheEvict
+//    @CacheEvict
+    @RedisDeleteOne(value = "id")
     public boolean delete(String id) {
-        boolean b = employeeMapper.deleteEmployee(id);
-        return b;
+//        boolean b = employeeMapper.deleteEmployee(id);
+////        return b;
+        return true;
     }
 
     @CachePut
