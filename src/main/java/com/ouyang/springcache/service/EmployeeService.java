@@ -1,10 +1,10 @@
 package com.ouyang.springcache.service;
 
 import com.ouyang.springcache.annotation.RedisDeleteOne;
+import com.ouyang.springcache.annotation.RetriceDelete;
 import com.ouyang.springcache.dao.EmployeeMapper;
 import com.ouyang.springcache.entity.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.CacheConfig;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @CacheConfig(cacheNames="emp"/*,cacheManager = "employeeCacheManager"*/) //抽取缓存的公共配置
-@Service
-public class EmployeeService {
-
+@Service("employeeService")
+public class EmployeeService<T> {
     @Autowired
+
     private EmployeeMapper employeeMapper;
 
     @Autowired
@@ -42,12 +42,12 @@ public class EmployeeService {
         return b;
     }
 
-//    @CacheEvict
-    @RedisDeleteOne(value = "id")
+    @CacheEvict
+//    @RedisDeleteOne(value = "id")
+    @RetriceDelete(value="lastName",clazz = EmployeeService.class)
     public boolean delete(String id) {
-//        boolean b = employeeMapper.deleteEmployee(id);
-////        return b;
-        return true;
+        boolean b = employeeMapper.deleteEmployee(id);
+        return b;
     }
 
     @CachePut

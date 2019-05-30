@@ -1,7 +1,6 @@
 package com.ouyang.springcache.dao;
 
 import com.ouyang.springcache.entity.Employee;
-import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;

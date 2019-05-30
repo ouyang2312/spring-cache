@@ -3,21 +3,21 @@ package com.ouyang.springcache.entity;
 import java.io.Serializable;
 
 public class Employee implements Serializable {
+    private static final long serialVersionUID = 1L;
+
     private Integer id;
     private String lastName;
     private String email;
     private Integer gender; //性别 1男 0女
-    private Integer dId;
 
     public Employee() {
     }
 
-    public Employee(Integer id, String lastName, String email, Integer gender, Integer dId) {
+    public Employee(Integer id, String lastName, String email, Integer gender) {
         this.id = id;
         this.lastName = lastName;
         this.email = email;
         this.gender = gender;
-        this.dId = dId;
     }
 
     public Integer getId() {
@@ -52,22 +52,4 @@ public class Employee implements Serializable {
         this.gender = gender;
     }
 
-    public Integer getdId() {
-        return dId;
-    }
-
-    public void setdId(Integer dId) {
-        this.dId = dId;
-    }
-
-    @Override
-    public String toString() {
-        return "Employee{" +
-                "id=" + id +
-                ", lastName='" + lastName + '\'' +
-                ", email='" + email + '\'' +
-                ", gender=" + gender +
-                ", dId=" + dId +
-                '}';
-    }
 }

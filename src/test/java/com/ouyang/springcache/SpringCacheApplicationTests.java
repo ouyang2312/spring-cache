@@ -5,7 +5,9 @@ import com.ouyang.springcache.entity.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -27,6 +29,7 @@ public class SpringCacheApplicationTests {
 
     @Autowired
     private StringRedisTemplate stringRedisTemplate;
+
 
     /**
      * 测试数据源
@@ -60,7 +63,7 @@ public class SpringCacheApplicationTests {
 
     @Test
     public void testRedisTemplate2(){
-        Employee employee = new Employee(5,"ouy","aas@qq.com",1,2);
+        Employee employee = new Employee(5,"ouy","aas@qq.com",1);
         redisTemplate.boundValueOps(employee.getLastName()).set(employee);
     }
 

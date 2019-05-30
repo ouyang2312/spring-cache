@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ouyang.springcache.dao.RetriceMapper">
+
+    <insert id="add" parameterType="com.ouyang.springcache.entity.Retrice">
+        insert  into
+        retrice
+        (
+            name,
+            delete_id
+        )values
+        (
+          #{name},
+          #{deleteId}
+        )
+    </insert>
+
+    <select id="list" resultType="com.ouyang.springcache.entity.Retrice">
+        select * from retrice
+    </select>
+
+    <update id="update">
+        update retrice
+        <set>
+            status = #{status}
+        </set>
+        where delete_id = #{deleteId}
+    </update>
+
+
+</mapper>
